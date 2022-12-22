@@ -1,0 +1,24 @@
+{
+  "name": "vidmaker",
+  "version": "1.0.0",
+  "description": "video maker",
+  "main": "index.js",
+  "author": "ganvoa",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "watch": "npx tsc --watch",
+    "build": "rm -rf build && tsc",
+    "format": "prettier --config .prettierrc '{src,app,tests}/**/*.ts' --write"
+  },
+  "dependencies": {
+    "axios": "^1.2.1",
+    "dotenv": "^16.0.3"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.17",
+    "prettier": "^2.8.1",
+    "prettier-plugin-organize-imports": "^3.2.1",
+    "typescript": "^4.9.4"
+  }
+}
