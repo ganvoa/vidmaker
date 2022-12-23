@@ -14,7 +14,7 @@ async function run(text: string) {
   const imageCreator = new ImageCreator(t2iService);
   try {
     const file = await imageCreator.create(text);
-    console.log(file.path);
+    console.log(file);
   } catch (error) {
     console.error(error);
   }
