@@ -12,21 +12,25 @@ export class TextToImageDalle implements TextToImageInterface {
     this.openai = new OpenAIApi(configuration);
   }
 
-  async fromString(text: string): Promise<File> {
+  async fromString(text: string): Promise<File[]> {
     const response = await this.openai.createImage({
       prompt: text,
-      n: 1,
+      n: 4,
       size: '512x512'
     });
 
-    const image_url = response.data.data[0].url;
+    const files: File[] = [];
+    for (const image of response.data.data) {
+      const image_url = image.url;
+      if (undefined == image_url) {
+        throw new Error('could create image');
+      }
 
-    if (undefined == image_url) {
-      throw new Error('could create image');
+      files.push({
+        path: image_url
+      });
     }
 
-    return Promise.resolve({
-      path: image_url
-    });
+    return Promise.resolve(files);
   }
 }
