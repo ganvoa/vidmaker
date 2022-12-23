@@ -1,10 +1,10 @@
 import { FileReaderInterface } from './FileReaderInterface';
-import { Narrative } from './Narrative';
+import { Script } from './Script';
 
-export class NarrativeParser {
+export class ScriptParser {
   constructor(private fileReader: FileReaderInterface) {}
 
-  async parse(filePath: string): Promise<Narrative> {
+  async parse(filePath: string): Promise<Script> {
     const content = await this.fileReader.fromPath(filePath);
 
     const introMatch = content.match(/Intro: "([\w\W]+?)"/);

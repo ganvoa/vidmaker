@@ -1,4 +1,4 @@
-export type Narrative = {
+export type Script = {
   readonly intro: string;
   readonly firstTitle: string;
   readonly firstParagraph: string;

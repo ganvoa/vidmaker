@@ -4,7 +4,8 @@ import { NarrativeCreator } from '../src/Application/NarrativeCreator';
 dotenv.config();
 
 import { VoiceCreator } from '../src/Application/VoiceCreator';
-import { NarrativeParser } from '../src/Domain/NarrativeParser';
+import { ScriptParser } from '../src/Domain/ScriptParser';
+import { FileDownloader } from '../src/Infrastructure/FileDownloader';
 import { FileReader } from '../src/Infrastructure/FileReader';
 import { HttpClientFetch } from '../src/Infrastructure/HttpClientFetch';
 import { TextToSpeechUD } from '../src/Infrastructure/TextToSpeechUD';
@@ -21,10 +22,11 @@ async function run(path: string) {
   const t2sService = new TextToSpeechUD(apiKey, apiSecret, voiceId, httpClient);
   const voiceCreator = new VoiceCreator(t2sService);
   const fileReader = new FileReader();
-  const narrativeParser = new NarrativeParser(fileReader);
-  const narrativeCreator = new NarrativeCreator(narrativeParser, voiceCreator);
+  const narrativeParser = new ScriptParser(fileReader);
+  const fileDownloader = new FileDownloader();
+  const narrativeCreator = new NarrativeCreator(narrativeParser, voiceCreator, fileDownloader);
   try {
-    await narrativeCreator.fromFile(path);
+    await narrativeCreator.create(path);
   } catch (error) {
     console.error(error);
   }
