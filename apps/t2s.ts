@@ -18,7 +18,7 @@ async function run(text: string) {
   const t2sService = new TextToSpeechUD(apiKey, apiSecret, voiceId, httpClient);
   const voiceCreator = new VoiceCreator(t2sService);
   try {
-    const file = await voiceCreator.createForText(text);
+    const file = await voiceCreator.create(text);
     console.log(file.path);
   } catch (error) {
     console.error(error);
